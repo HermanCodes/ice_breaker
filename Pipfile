@@ -10,6 +10,7 @@ typing-inspect = "*"
 openai = "*"
 python-certifi-win32 = "*"
 google-search-results = "*"
+flask = "*"
 
 [dev-packages]
 
