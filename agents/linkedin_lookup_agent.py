@@ -6,10 +6,11 @@ from langchain.agents import initialize_agent, Tool, AgentType
 from tools.tools import get_profile_url
 
 
-def lookup(name: str, additional_info: str = "") -> str:
+def lookup(name: str) -> str:
     llm = AzureChatOpenAI(deployment_name="RegMarketGpt35Turbo", temperature=0)
-    template = """Given the full name {name_of_person} and any additional information provided {additional_information}, 
-    I want you to get me a link to their LinkedIn profile page. Your answer should contain only a URL."""
+    template = """Given the full name {name_of_person}, I want you to get me a link to their LinkedIn profile page. 
+    Your answer should contain only a URL.
+    """
 
     tools_for_agent = [
         Tool(
@@ -26,12 +27,8 @@ def lookup(name: str, additional_info: str = "") -> str:
         verbose=True,
     )
     prompt_template = PromptTemplate(
-        template=template, input_variables=["name_of_person", "additional_info"]
+        template=template, input_variables=["name_of_person"]
     )
 
-    linkedin_profile_url = agent.run(
-        prompt_template.format_prompt(
-            name_of_person=name, additional_info=additional_info
-        )
-    )
+    linkedin_profile_url = agent.run(prompt_template.format_prompt(name_of_person=name))
     return linkedin_profile_url

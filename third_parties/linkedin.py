@@ -12,7 +12,7 @@ def scrape_linkedin_profile(linkedin_profile_url: str):
     return clean_data(response)
 
 
-def scrape_linkedin_profile_test():
+def scrape_linkedin_profile_test(name: str):
     """scrape information from LinkedIn profiles,
     Manually scrape LinkedIn profile information using the LinkedIn API
     This function uses a gist url so that we don't waste our API calls"""

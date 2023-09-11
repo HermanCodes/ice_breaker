@@ -101,8 +101,8 @@ class CustomSerpAPIWrapper(SerpAPIWrapper):
             return "No good search result found"
 
 
-def get_profile_url(name: str, additional_info: str = ""):
+def get_profile_url(name: str):
     """Searches for LinkedIn Profile Page."""
     search = CustomSerpAPIWrapper()
-    res = search.run(f"{name} {additional_info}")
+    res = search.run(f"{name}")
     return res

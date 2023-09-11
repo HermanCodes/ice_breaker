@@ -1,3 +1,5 @@
+from typing import Tuple
+
 from langchain import PromptTemplate
 from langchain.chat_models import AzureChatOpenAI
 from langchain.chains import LLMChain
@@ -12,10 +14,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def ice_break(name: str) -> PersonIntel:
-    # linkedin_profile_url = linkedin_lookup_agent(name=name)
-    # linkedin_data = scrape_linkedin_profile(linkedin_profile_url=linkedin_profile_url)
-    linkedin_data = scrape_linkedin_profile_test()
+def ice_break(name: str) -> Tuple[PersonIntel, str]:
+    linkedin_profile_url = linkedin_lookup_agent(name=name)
+    linkedin_data = scrape_linkedin_profile(linkedin_profile_url=linkedin_profile_url)
+    # linkedin_data = scrape_linkedin_profile_test(name=name)
 
     summary_template = """
             given the following Linkedin information {information} about a person, I want you to create:
@@ -46,9 +48,9 @@ def ice_break(name: str) -> PersonIntel:
         print(result)
         print(f"Total Cost (USD): ${format(cb.total_cost, '.6f')}")
 
-    return person_intel_parser.parse(result)
+    return person_intel_parser.parse(result), linkedin_data.get("profile_pic_url")
 
 
 if __name__ == "__main__":
     print("Hello, LangChain!")
-    result = ice_break(name="John Doe")
+    result = ice_break(name="Neha Shawrikar")
