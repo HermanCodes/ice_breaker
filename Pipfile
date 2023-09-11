@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+langchain = "*"
+black = "*"
+typing-inspect = "*"
+openai = "*"
+python-certifi-win32 = "*"
+google-search-results = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
